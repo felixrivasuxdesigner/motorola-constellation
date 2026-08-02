@@ -130,16 +130,15 @@
     const url = wallpaperUrl(section);
 
     const img = frame.querySelector(".wallpaper-image");
-    const title = frame.querySelector(".wallpaper-title");
-    const subtitle = frame.querySelector(".wallpaper-subtitle");
-    const meta = frame.querySelector(".wallpaper-meta");
+    const hero = document.querySelector(".wallpaper-hero");
+    const title = hero ? hero.querySelector(".wallpaper-title") : null;
+    const subtitle = hero ? hero.querySelector(".wallpaper-subtitle") : null;
     const spinner = document.getElementById("spinner");
     const sectionIdEl = document.getElementById("section-id");
     const downloadBtn = document.querySelector(".btn-download");
 
     if (title) title.textContent = section.title;
     if (subtitle) subtitle.textContent = section.subtitle || "Sin subtítulo";
-    if (meta) meta.textContent = `Sección ${section.id} · ${section.title}`;
     if (sectionIdEl) sectionIdEl.textContent = String(section.id);
 
     if (img) {
