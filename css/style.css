@@ -432,7 +432,7 @@ body::before {
 }
 
 .wallpaper-subtitle {
-  font-size: clamp(.9rem, 2.5vw, 1.1rem);
+  font-size: clamp(.9rem, 2.5vw, 1.6rem);
   font-weight: 400;
   text-align: center;
   color: #c2b2d6;
