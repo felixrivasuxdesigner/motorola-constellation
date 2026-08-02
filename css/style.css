@@ -62,7 +62,6 @@ h1, h2, h3, .logo,
   z-index: 999;
   pointer-events: none;
   opacity: 0.85;
-  transform: scaleX(-1);
 }
 
 @media (max-width: 600px) {
