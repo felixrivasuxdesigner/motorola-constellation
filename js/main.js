@@ -15,7 +15,7 @@
       - wallpaper: path del wallpaper real (local)
       ------------------------------------------------ */
    const SECTIONS = [
-     { id: 1, title: "TONE",  colorVar: "--neon-cyan",    thumb: "assets/1-TONE.png",  wallpaper: "assets/wallpapers/1-TONE-wallp.jpg" },
+     { id: 1, title: "TONE",  colorVar: "--neon-cyan",    thumb: "assets/1-TONE.png",  wallpaper: "assets/wallpapers/1-TONE-wallp.jpg", subtitle: "El orden no es suerte, es liderazgo ✨" },
      { id: 2, title: "DANU",  colorVar: "--neon-purple",  thumb: "assets/2-DANU.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-2/1920/1080" },
      { id: 3, title: "VALE",  colorVar: "--neon-magenta", thumb: "assets/3-VALE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-3/1920/1080" },
      { id: 4, title: "EUGE",  colorVar: "--neon-cyan",    thumb: "assets/4-EUGE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-4/1920/1080" },
@@ -131,12 +131,14 @@
 
     const img = frame.querySelector(".wallpaper-image");
     const title = frame.querySelector(".wallpaper-title");
+    const subtitle = frame.querySelector(".wallpaper-subtitle");
     const meta = frame.querySelector(".wallpaper-meta");
     const spinner = document.getElementById("spinner");
     const sectionIdEl = document.getElementById("section-id");
     const downloadBtn = document.querySelector(".btn-download");
 
     if (title) title.textContent = section.title;
+    if (subtitle) subtitle.textContent = section.subtitle || "Sin subtítulo";
     if (meta) meta.textContent = `Sección ${section.id} · ${section.title}`;
     if (sectionIdEl) sectionIdEl.textContent = String(section.id);
 

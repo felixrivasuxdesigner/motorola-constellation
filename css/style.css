@@ -371,13 +371,14 @@ body::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: clamp(1.5rem, 5vw, 2rem);
 }
 
 .wallpaper-frame {
   position: relative;
   width: min(95vmin, 1100px);
+  max-height: calc(100dvh - clamp(4rem, 10vw, 6rem));
   border-radius: 16px;
   overflow: hidden;
   border: 2px solid var(--neon-purple);
@@ -401,27 +402,45 @@ body::before {
 }
 
 .wallpaper-image {
-  /* imágenes verticales (224x250): se muestran completas y centradas */
-  max-width: min(90vmin, 560px);
-  max-height: 82vh;
-  width: auto;
-  height: auto;
+  /* Imagen rellena todo el recuadro */
+  width: 100%;
+  height: 100%;
   display: block;
-  margin: 0 auto;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
   opacity: 0;
   transition: opacity .4s ease;
+}
+
+/* Text overlay at bottom of image */
+.wallpaper-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  background: linear-gradient(transparent 0%, rgba(10, 5, 25, .9) 100%);
+  pointer-events: none;
 }
 
 .wallpaper-title {
   font-size: clamp(1.5rem, 4vw, 2.6rem);
   font-weight: 800;
   text-align: center;
-  margin-bottom: .5rem;
+  margin-bottom: .3rem;
   background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.wallpaper-subtitle {
+  font-size: clamp(.9rem, 2.5vw, 1.1rem);
+  font-weight: 400;
+  text-align: center;
+  color: #c2b2d6;
+  line-height: 1.4;
 }
 
 .wallpaper-meta {
@@ -490,8 +509,11 @@ body::before {
     0 0 24px rgba(0, 243, 255, .3);
 }
 
-/* Back link */
+/* Back link — fixed bottom-left */
 .back-link {
+  position: fixed;
+  bottom: max(1.5rem, env(safe-area-inset-bottom));
+  left: max(1.5rem, env(safe-area-inset-left));
   display: inline-flex;
   align-items: center;
   gap: .5rem;
@@ -501,8 +523,15 @@ body::before {
   border: 1px solid rgba(179, 0, 255, .4);
   padding: clamp(.4rem, 1.5vw, .5rem) clamp(.8rem, 3vw, 1.1rem);
   border-radius: 30px;
-  margin-bottom: 1.5rem;
+  z-index: 999;
   transition: all .2s ease;
+}
+
+@media (max-width: 600px) {
+  .back-link {
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    left: max(1rem, env(safe-area-inset-left));
+  }
 }
 
 .back-link:hover {
@@ -634,6 +663,24 @@ body::before {
   .astral-ring { width: min(95vmin, 300px); height: min(95vmin, 300px); }
   .ring-hub { width: 100px; height: 100px; margin: -50px 0 0 -50px; }
   .orbit-node { width: min(120px, 20vmin); height: min(120px, 20vmin); }
+}
+
+/* ---- Wallpaper page responsive ---- */
+@media (max-width: 768px) {
+  .wallpaper-frame { max-height: calc(100dvh - 12rem); }
+  .wallpaper-actions { position: fixed; bottom: max(5rem, calc(1.5rem + env(safe-area-inset-bottom))); right: max(1.5rem, env(safe-area-inset-right)); z-index: 999; }
+  .wallpaper-actions .btn { font-size: clamp(.9rem, 2.5vw, 1rem); }
+  .site-footer { position: fixed; bottom: 0; left: 0; right: 0; padding: .6rem; font-size: .7rem; }
+}
+
+@media (max-width: 600px) {
+  .wallpaper-text { padding: clamp(.8rem, 3vw, 1rem); }
+  .wallpaper-title { font-size: clamp(1.2rem, 4vw, 1.6rem); }
+  .wallpaper-subtitle { font-size: clamp(.75rem, 2.5vw, .95rem); }
+}
+
+@media (max-width: 400px) {
+  .wallpaper-actions { bottom: max(3.5rem, calc(1rem + env(safe-area-inset-bottom))); right: max(1rem, env(safe-area-inset-right)); }
 }
 
 /* ---- Loading spinner (neon) ---- */
