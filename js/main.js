@@ -9,18 +9,21 @@
   /* ------------------------------------------------
      Configuration: the 9 sections / wallpapers
      ------------------------------------------------ */
-  // 👇 Reemplaza los placeholders por las rutas de tus wallpapers reales:
-  //    "assets/wallpapers/nombre.jpg"  (alta resolución 1920×1080 o superior)
+  /* ------------------------------------------------
+     Configuration: the 9 sections
+     - thumb:    imagen numerada que gira alrededor del sol (botón orbital)
+     - wallpaper: placeholder hasta que subas los wallpapers reales
+     ------------------------------------------------ */
   const SECTIONS = [
-    { id: 1, title: "Amanecer Cósmico", colorVar: "--neon-cyan", wallpaper: "https://picsum.photos/seed/motorola-wp-1/1920/1080" },
-    { id: 2, title: "Nebulosa Violeta", colorVar: "--neon-purple", wallpaper: "https://picsum.photos/seed/motorola-wp-2/1920/1080" },
-    { id: 3, title: "Constelación Írida", colorVar: "--neon-magenta", wallpaper: "https://picsum.photos/seed/motorola-wp-3/1920/1080" },
-    { id: 4, title: "Horizonte Galáctico", colorVar: "--neon-cyan", wallpaper: "https://picsum.photos/seed/motorola-wp-4/1920/1080" },
-    { id: 5, title: "Agujero de Gusano", colorVar: "--neon-pink", wallpaper: "https://picsum.photos/seed/motorola-wp-5/1920/1080" },
-    { id: 6, title: "Supernova", colorVar: "--neon-magenta", wallpaper: "https://picsum.photos/seed/motorola-wp-6/1920/1080" },
-    { id: 7, title: "Andrómeda", colorVar: "--neon-purple", wallpaper: "https://picsum.photos/seed/motorola-wp-7/1920/1080" },
-    { id: 8, title: "Pulsar", colorVar: "--neon-cyan", wallpaper: "https://picsum.photos/seed/motorola-wp-8/1920/1080" },
-    { id: 9, title: "Vía Láctea", colorVar: "--neon-pink", wallpaper: "https://picsum.photos/seed/motorola-wp-9/1920/1080" },
+    { id: 1, title: "TONE",  colorVar: "--neon-cyan",    thumb: "assets/1-TONE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-1/1920/1080" },
+    { id: 2, title: "DANU",  colorVar: "--neon-purple",  thumb: "assets/2-DANU.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-2/1920/1080" },
+    { id: 3, title: "VALE",  colorVar: "--neon-magenta", thumb: "assets/3-VALE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-3/1920/1080" },
+    { id: 4, title: "EUGE",  colorVar: "--neon-cyan",    thumb: "assets/4-EUGE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-4/1920/1080" },
+    { id: 5, title: "BELU",  colorVar: "--neon-pink",    thumb: "assets/5-BELU.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-5/1920/1080" },
+    { id: 6, title: "ALEJO", colorVar: "--neon-magenta", thumb: "assets/6-ALEJO.png", wallpaper: "https://picsum.photos/seed/motorola-wp-6/1920/1080" },
+    { id: 7, title: "CARO",  colorVar: "--neon-purple",  thumb: "assets/7-CARO.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-7/1920/1080" },
+    { id: 8, title: "MARTU", colorVar: "--neon-cyan",    thumb: "assets/8-MARTU.png", wallpaper: "https://picsum.photos/seed/motorola-wp-8/1920/1080" },
+    { id: 9, title: "ARI",   colorVar: "--neon-pink",    thumb: "assets/9-ARI.png",   wallpaper: "https://picsum.photos/seed/motorola-wp-9/1920/1080" },
   ];
 
   const NEON_CLASS = {
@@ -41,6 +44,14 @@
     return new URLSearchParams(window.location.search).get(name);
   }
 
+  // Responsive orbital radius: fits the ring container so buttons never overflow
+  function computeOrbitalRadius(ring, nodes) {
+    const ringRect = ring.getBoundingClientRect();
+    const nodeW = (nodes[0] && nodes[0].getBoundingClientRect().width) || 150;
+    const maxRadius = Math.min(280, ringRect.width / 2 - nodeW / 2 - 12);
+    return Math.max(120, Math.floor(maxRadius));
+  }
+
   /* ------------------------------------------------
      RING POSITIONING (orbital buttons on index page)
      ------------------------------------------------ */
@@ -50,20 +61,34 @@
 
     const nodes = ring.querySelectorAll(".orbit-node");
     const count = nodes.length;
-    const radius = 190; // px from hub center
 
-    // Assign color + click handler once
+    // Responsive orbital radius: keeps buttons inside the ring on any screen size
+    let radius = computeOrbitalRadius(ring, nodes);
+    window.addEventListener("resize", () => {
+      radius = computeOrbitalRadius(ring, nodes);
+    });
+
+    // Assign color + click handler once, and place the numbered image on each button
     nodes.forEach((node, i) => {
       const section = SECTIONS[i] || SECTIONS[i % SECTIONS.length];
       const label = node.querySelector(".node-label");
       if (label) {
-        label.className = "node-label " + (NEON_CLASS[section.colorVar] || "neon-magenta");
+        label.className = "node-label";
+
+        // Render the numbered image as the button (instead of plain number text)
+        label.innerHTML = "";
+        const img = document.createElement("img");
+        img.src = section.thumb;
+        img.alt = section.title;
+        img.className = "orbit-thumb";
+        label.appendChild(img);
+
         label.addEventListener("click", (e) => {
           e.preventDefault();
           window.location.href = `wallpaper.html?id=${section.id}`;
         });
       }
-     });
+    });
 
     // Central sun: clickable → open the cosmic thank-you popup (no navigation)
     const hub = document.querySelector(".ring-hub");
@@ -82,7 +107,8 @@
         const angleRad = (angleDeg - 90) * (Math.PI / 180);
         const x = Math.cos(angleRad) * radius;
         const y = Math.sin(angleRad) * radius;
-        node.style.transform = `translate(${x}px, ${y}px)`;
+        // calc(-50%) centers the (responsive-size) button on its orbital point
+        node.style.transform = `translate(calc(${x}px - 50%), calc(${y}px - 50%))`;
       });
       requestAnimationFrame(animate);
     };
@@ -111,7 +137,7 @@
     const downloadBtn = document.querySelector(".btn-download");
 
     if (title) title.textContent = section.title;
-    if (meta) meta.textContent = `Sección ${section.id} · Resolución 1920×1080`;
+    if (meta) meta.textContent = `Sección ${section.id} · ${section.title}`;
     if (sectionIdEl) sectionIdEl.textContent = String(section.id);
 
     if (img) {
@@ -123,7 +149,7 @@
     }
     if (downloadBtn) {
       downloadBtn.href = url;
-      downloadBtn.download = `motorola-constellation-${section.id}.jpg`;
+      downloadBtn.download = `${section.title}.png`;
     }
   }
 
@@ -180,6 +206,36 @@
   }
 
   /* ------------------------------------------------
+     Cursor magical sparkle (constellation page only)
+     ------------------------------------------------ */
+  function initCursorSparkle() {
+    let pending = false, cx = 0, cy = 0;
+
+    document.addEventListener("mousemove", (e) => {
+      cx = e.clientX;
+      cy = e.clientY;
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(() => {
+        pending = false;
+        emitSparkle(cx, cy);
+      });
+    });
+
+    function emitSparkle(x, y) {
+      const el = document.createElement("div");
+      el.className = "sparkle";
+      const size = 4 + Math.random() * 4;
+      el.style.width = el.style.height = size + "px";
+      el.style.left = x + "px";
+      el.style.top = y + "px";
+      el.style.background = Math.random() > .55 ? "var(--neon-white)" : "var(--star-white)";
+      el.addEventListener("animationend", () => el.remove());
+      document.body.appendChild(el);
+    }
+  }
+
+  /* ------------------------------------------------
      Init
      ------------------------------------------------ */
   function init() {
@@ -187,6 +243,7 @@
     initWallpaperPage();
     initCosmicPopup();
     initAccessibilityToggle();
+    initCursorSparkle();
   }
 
   if (document.readyState === "loading") {

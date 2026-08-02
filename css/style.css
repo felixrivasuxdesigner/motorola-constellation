@@ -86,10 +86,7 @@ html.big-text {
 }
 
 .a11y-toggle:hover {
-  background: rgba(255, 215, 0, .15);
-  box-shadow:
-    0 0 14px var(--gold-glow),
-    0 0 28px var(--gold-soft);
+  background: rgba(255, 255, 255, .14);
   transform: scale(1.14);
 }
 
@@ -99,6 +96,25 @@ html.big-text {
     0 0 16px var(--gold-glow),
     0 0 32px var(--gold-soft),
     0 0 56px var(--gold-deep);
+}
+
+/* ---- Cursor magical sparkle (index constellation page) ---- */
+.sparkle {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--neon-white);
+  box-shadow: 0 0 6px 2px rgba(255, 253, 240, .55);
+  pointer-events: none;
+  z-index: 9999;
+  animation: sparkle-fade .65s ease-out forwards;
+}
+@keyframes sparkle-fade {
+  0%   { transform: translate(-50%, -50%) scale(.6); opacity: .95; }
+  100% { transform: translate(-50%, -50%) scale(1.7) rotate(220deg); opacity: 0; }
 }
 
 /* ---- Starfield (pure CSS) ---- */
@@ -195,7 +211,7 @@ body::before {
   z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 2rem;
 }
 
 /* =====================================================
@@ -203,12 +219,12 @@ body::before {
    ===================================================== */
 .site-header {
   text-align: center;
-  padding: 4rem 1rem 2rem;
+  padding: 2rem 1rem 2rem;
 }
 
 .site-header h1 {
-  font-size: clamp(2.2rem, 6vw, 4rem);
-  font-weight: 800;
+  font-size: clamp(2.2rem, 6vw, 3rem);
+  font-weight: 300;
   background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-magenta));
   background-clip: text;
   -webkit-background-clip: text;
@@ -219,7 +235,7 @@ body::before {
 
 .site-header .subtitle {
   margin-top: .8rem;
-  font-size: 1.15rem;
+  font-size: 1.6rem;
   color: #c2b2d6;
   text-shadow: 0 0 6px rgba(179, 0, 255, .4);
 }
@@ -229,9 +245,9 @@ body::before {
    ===================================================== */
 .astral-ring {
   position: relative;
-  width: min(90vmin, 520px);
-  height: min(90vmin, 520px);
-  margin: 3rem auto 1.5rem;
+  width: min(90vmin, 700px);
+  height: min(90vmin, 700px);
+  margin: 0 auto 1.5rem;
 }
 
 /* Center hub */
@@ -239,46 +255,30 @@ body::before {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 120px;
-  height: 120px;
-  margin: -60px 0 0 -60px;
+   width: 150px;
+   height: 150px;
+   margin: -75px 0 0 -75px;
   border-radius: 50%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle, #1a0f2a 0%, #0a030a 65%);
-  border: 2px solid var(--neon-white);
-  box-shadow:
-    0 0 12px var(--gold-glow),
-    0 0 28px var(--gold-soft),
-    0 0 60px var(--gold-deep);
+   justify-content: center;
+   background: transparent;
+   border: none;
+  box-shadow: none;
   z-index: 5;
-  animation: pulseHub 4s ease-in-out infinite;
-  transition: transform .3s ease, box-shadow .3s ease;
+  transition: transform .25s ease;
 }
 
 .ring-hub:hover {
-  transform: scale(1.08) rotate(2deg);
-  box-shadow:
-    0 0 20px var(--gold-glow),
-    0 0 40px var(--gold-soft),
-    0 0 80px var(--gold-deep),
-    0 0 120px rgba(255, 215, 0, .18);
+  transform: scale(1.06);
 }
 
-.ring-hub .logo {
-  font-size: 2.2rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--neon-gold), #ffb300);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: none;
-}
-
-@keyframes pulseHub {
-  0%, 100% { box-shadow: 0 0 12px var(--gold-glow), 0 0 28px var(--gold-soft), 0 0 60px var(--gold-deep); }
-  50% { box-shadow: 0 0 18px var(--gold-glow), 0 0 36px var(--gold-soft), 0 0 72px rgba(255, 215, 0, .28), 0 0 120px var(--gold-deep); }
+.ring-hub .hub-logo {
+   width: min(150px, 20vmin);
+   height: auto;
+   max-width: 150px;
+  display: block;
+  filter: none;
 }
 
 /* Orbit path ring (decorative) */
@@ -317,84 +317,55 @@ body::before {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 76px;
-  height: 76px;
-  margin: -38px 0 0 -38px;
+  width: min(150px, 20vmin);
+  height: min(150px, 20vmin);
   z-index: 3;
   cursor: pointer;
-  /* position applied by JS via translate() so text stays upright */
+  /* centering + orbital position applied by JS (translate + calc) */
 }
 
 .orbit-node .node-inner {
   position: static;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   width: 100%;
   height: 100%;
   transform: none;
 }
 
-/* Inner label (upright) → golden constellation circles */
+/* Transparent button: just the numbered PNG (no background / no border) */
 .orbit-node .node-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  font-family: 'Cinzel Decorative', 'Segoe UI', sans-serif;
-  background: radial-gradient(circle, #1a0f2a 0%, #0a021a 70%);
-  border: 1.5px solid var(--neon-white);
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  padding: 0;
   color: #fff7e6;
   font-size: 1.2rem;
   font-weight: 700;
   text-decoration: none;
-  letter-spacing: .03em;
-  text-shadow:
-    0 0 6px var(--gold-soft),
-    0 0 12px rgba(255, 215, 0, .25);
-  box-shadow:
-    0 0 6px var(--gold-glow),
-    0 0 14px var(--gold-soft),
-    0 0 28px var(--gold-deep);
-  transition: all .3s ease;
-  will-change: transform, box-shadow, border-color;
+  text-shadow: none;
+  box-shadow: none;
+  transition: transform .25s ease, box-shadow .25s ease;
+  will-change: transform, box-shadow;
   position: relative;
   overflow: visible;
 }
 
-/* Soft golden blur halo that blooms on hover */
-.orbit-node .node-label::after {
-  content: "";
-  position: absolute;
-  inset: -10px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 215, 0, .22) 0%, transparent 55%);
-  opacity: 0;
-  filter: blur(7px);
-  transform: scale(.65);
-  transition: opacity .35s ease, transform .45s ease;
-  pointer-events: none;
+/* Numbered image orbiting around the sun */
+.orbit-node .node-label .orbit-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0;
+  display: block;
 }
 
+/* Subtle scale feedback on hover (no golden halo) */
 .orbit-node .node-label:hover {
-  transform: scale(1.18) translateZ(0);
-  border-color: var(--neon-gold);
-  box-shadow:
-    0 0 12px var(--gold-glow),
-    0 0 24px var(--gold-soft),
-    0 0 48px var(--gold-deep),
-    0 0 80px rgba(255, 215, 0, .35);
-  color: var(--neon-gold);
-  text-shadow:
-    0 0 10px var(--gold-glow),
-    0 0 22px var(--gold-soft);
-}
-
-.orbit-node .node-label:hover::after {
-  opacity: 1;
-  transform: scale(1.35);
+  transform: scale(1.1) translateZ(0);
 }
 
 /* Hover ripple on entire ring */
@@ -438,10 +409,14 @@ body::before {
 }
 
 .wallpaper-image {
-  width: 100%;
+  /* imágenes verticales (224x250): se muestran completas y centradas */
+  max-width: min(90vmin, 560px);
+  max-height: 82vh;
+  width: auto;
   height: auto;
   display: block;
-  object-fit: cover;
+  margin: 0 auto;
+  object-fit: contain;
   opacity: 0;
   transition: opacity .4s ease;
 }
@@ -479,7 +454,7 @@ body::before {
   gap: .6rem;
   padding: .8rem 1.6rem;
   border-radius: 50px;
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: 600;
   text-decoration: none;
   border: 2px solid transparent;
@@ -530,10 +505,11 @@ body::before {
   gap: .5rem;
   color: #c2b2d6;
   text-decoration: none;
-  font-size: .95rem;
+  font-size: 1.4rem;
   border: 1px solid rgba(179, 0, 255, .4);
   padding: .5rem 1.1rem;
   border-radius: 30px;
+  margin-bottom: 1.5rem;
   transition: all .2s ease;
 }
 
@@ -644,9 +620,8 @@ body::before {
 /* ---- Responsive tweaks ---- */
 @media (max-width: 600px) {
   .astral-ring { width: min(95vmin, 340px); height: min(95vmin, 340px); }
-  .orbit-node { width: 62px; height: 62px; margin: -31px 0 0 -31px; }
-  .orbit-node .node-label { width: 62px; height: 62px; font-size: .9rem; }
-  .ring-hub { width: 94px; height: 94px; margin: -47px 0 0 -47px; }
+  /* orbit-node sizes itself via min(150px, 20vmin) + JS calc centering */
+  .ring-hub { width: 112px; height: 112px; margin: -56px 0 0 -56px; }
   .wallpaper-actions { flex-direction: column; align-items: stretch; }
 }
 
