@@ -9,22 +9,22 @@
   /* ------------------------------------------------
      Configuration: the 9 sections / wallpapers
      ------------------------------------------------ */
-  /* ------------------------------------------------
-     Configuration: the 9 sections
-     - thumb:    imagen numerada que gira alrededor del sol (botón orbital)
-     - wallpaper: placeholder hasta que subas los wallpapers reales
-     ------------------------------------------------ */
-  const SECTIONS = [
-    { id: 1, title: "TONE",  colorVar: "--neon-cyan",    thumb: "assets/1-TONE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-1/1920/1080" },
-    { id: 2, title: "DANU",  colorVar: "--neon-purple",  thumb: "assets/2-DANU.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-2/1920/1080" },
-    { id: 3, title: "VALE",  colorVar: "--neon-magenta", thumb: "assets/3-VALE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-3/1920/1080" },
-    { id: 4, title: "EUGE",  colorVar: "--neon-cyan",    thumb: "assets/4-EUGE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-4/1920/1080" },
-    { id: 5, title: "BELU",  colorVar: "--neon-pink",    thumb: "assets/5-BELU.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-5/1920/1080" },
-    { id: 6, title: "ALEJO", colorVar: "--neon-magenta", thumb: "assets/6-ALEJO.png", wallpaper: "https://picsum.photos/seed/motorola-wp-6/1920/1080" },
-    { id: 7, title: "CARO",  colorVar: "--neon-purple",  thumb: "assets/7-CARO.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-7/1920/1080" },
-    { id: 8, title: "MARTU", colorVar: "--neon-cyan",    thumb: "assets/8-MARTU.png", wallpaper: "https://picsum.photos/seed/motorola-wp-8/1920/1080" },
-    { id: 9, title: "ARI",   colorVar: "--neon-pink",    thumb: "assets/9-ARI.png",   wallpaper: "https://picsum.photos/seed/motorola-wp-9/1920/1080" },
-  ];
+   /* ------------------------------------------------
+      Configuration: the 9 sections
+      - thumb:    imagen numerada que gira alrededor del sol (botón orbital)
+      - wallpaper: path del wallpaper real (local)
+      ------------------------------------------------ */
+   const SECTIONS = [
+     { id: 1, title: "TONE",  colorVar: "--neon-cyan",    thumb: "assets/1-TONE.png",  wallpaper: "assets/wallpapers/1-TONE-wallp.jpg" },
+     { id: 2, title: "DANU",  colorVar: "--neon-purple",  thumb: "assets/2-DANU.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-2/1920/1080" },
+     { id: 3, title: "VALE",  colorVar: "--neon-magenta", thumb: "assets/3-VALE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-3/1920/1080" },
+     { id: 4, title: "EUGE",  colorVar: "--neon-cyan",    thumb: "assets/4-EUGE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-4/1920/1080" },
+     { id: 5, title: "BELU",  colorVar: "--neon-pink",    thumb: "assets/5-BELU.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-5/1920/1080" },
+     { id: 6, title: "ALEJO", colorVar: "--neon-magenta", thumb: "assets/6-ALEJO.png", wallpaper: "https://picsum.photos/seed/motorola-wp-6/1920/1080" },
+     { id: 7, title: "CARO",  colorVar: "--neon-purple",  thumb: "assets/7-CARO.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-7/1920/1080" },
+     { id: 8, title: "MARTU", colorVar: "--neon-cyan",    thumb: "assets/8-MARTU.png", wallpaper: "https://picsum.photos/seed/motorola-wp-8/1920/1080" },
+     { id: 9, title: "ARI",   colorVar: "--neon-pink",    thumb: "assets/9-ARI.png",   wallpaper: "https://picsum.photos/seed/motorola-wp-9/1920/1080" },
+   ];
 
   const NEON_CLASS = {
     "--neon-cyan": "neon-cyan",
@@ -149,7 +149,7 @@
     }
     if (downloadBtn) {
       downloadBtn.href = url;
-      downloadBtn.download = `${section.title}.png`;
+       downloadBtn.download = `${section.title}.jpg`;
     }
   }
 
