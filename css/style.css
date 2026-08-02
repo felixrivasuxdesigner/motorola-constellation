@@ -378,14 +378,15 @@ body::before {
 .wallpaper-frame {
   position: relative;
   width: min(95vmin, 1100px);
-  max-height: calc(100dvh - clamp(4rem, 10vw, 6rem));
+  max-height: calc(100dvh - clamp(6rem, 12vw, 8rem));
   border-radius: 16px;
   overflow: hidden;
-  border: 2px solid var(--neon-purple);
+  border: 2px solid var(--neon-gold);
   box-shadow:
     0 0 20px rgba(179, 0, 255, .45),
     0 0 40px rgba(0, 243, 255, .2),
-    0 0 72px rgba(179, 0, 255, .12);
+    0 0 72px rgba(179, 0, 255, .12),
+    0 0 40px var(--gold-glow);
   background: #0c0718;
   margin-bottom: 1.5rem;
 }
@@ -412,16 +413,11 @@ body::before {
   transition: opacity .4s ease;
 }
 
-/* Text overlay at bottom of image */
+/* Title / Subtitle: outside frame, below image */
 .wallpaper-text {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 3;
-  padding: clamp(1rem, 3vw, 1.5rem);
-  background: linear-gradient(transparent 0%, rgba(10, 5, 25, .9) 100%);
-  pointer-events: none;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 .wallpaper-title {
@@ -667,19 +663,20 @@ body::before {
 
 /* ---- Wallpaper page responsive ---- */
 @media (max-width: 768px) {
-  .wallpaper-frame { max-height: calc(100dvh - 12rem); }
+  .wallpaper-frame { max-height: calc(100dvh - 10rem); }
   .wallpaper-actions { position: fixed; bottom: max(5rem, calc(1.5rem + env(safe-area-inset-bottom))); right: max(1.5rem, env(safe-area-inset-right)); z-index: 999; }
-  .wallpaper-actions .btn { font-size: clamp(.9rem, 2.5vw, 1rem); }
+  .wallpaper-actions .btn { font-size: clamp(.9rem, 2.5vw, 1rem); padding: .6rem 1.2rem; }
   .site-footer { position: fixed; bottom: 0; left: 0; right: 0; padding: .6rem; font-size: .7rem; }
 }
 
 @media (max-width: 600px) {
-  .wallpaper-text { padding: clamp(.8rem, 3vw, 1rem); }
+  .wallpaper-frame { max-height: calc(100dvh - 12rem); }
   .wallpaper-title { font-size: clamp(1.2rem, 4vw, 1.6rem); }
   .wallpaper-subtitle { font-size: clamp(.75rem, 2.5vw, .95rem); }
 }
 
 @media (max-width: 400px) {
+  .wallpaper-frame { max-height: calc(100dvh - 14rem); }
   .wallpaper-actions { bottom: max(3.5rem, calc(1rem + env(safe-area-inset-bottom))); right: max(1rem, env(safe-area-inset-right)); }
 }
 
