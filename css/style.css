@@ -33,6 +33,24 @@ html {
   font-size: 16px;
 }
 
+/* =====================================================
+   RESPONSIVE BREAKPOINTS SYSTEM
+   ===================================================== */
+/* Mobile-first: 320 → 480 → 600 → 768 → 1024+
+   Fluid typography uses clamp() throughout. */
+
+/* ---- Tablet breakpoint ---- */
+@media (max-width: 768px) {
+  .container { padding: 0 clamp(1rem, 4vw, 2rem); }
+}
+
+/* ---- Large mobile / small tablet overlap ---- */
+@media (max-width: 600px) {
+  .container { padding: 0 clamp(1rem, 5vw, 1.5rem); }
+  .site-header { padding: clamp(1rem, 4vw, 1.5rem) 1rem; }
+  .wallpaper-hero { padding: clamp(1.5rem, 5vw, 2rem); }
+}
+
 body {
   min-height: 100vh;
   font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
@@ -197,21 +215,21 @@ body::before {
 }
 
 .site-header h1 {
-  font-size: clamp(2.2rem, 6vw, 3rem);
-  font-weight: 300;
-  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-magenta));
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  letter-spacing: .04em;
-  line-height: 1.1;
+   font-size: clamp(1.8rem, 8vw, 3rem);
+   font-weight: 300;
+   background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-magenta));
+   background-clip: text;
+   -webkit-background-clip: text;
+   color: transparent;
+   letter-spacing: .04em;
+   line-height: 1.1;
 }
 
 .site-header .subtitle {
-  margin-top: .8rem;
-  font-size: 1.6rem;
-  color: #c2b2d6;
-  text-shadow: 0 0 6px rgba(179, 0, 255, .4);
+   margin-top: .8rem;
+   font-size: clamp(1.2rem, 4vw, 1.6rem);
+   color: #c2b2d6;
+   text-shadow: 0 0 6px rgba(179, 0, 255, .4);
 }
 
 /* =====================================================
@@ -354,7 +372,7 @@ body::before {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: clamp(1.5rem, 5vw, 2rem);
 }
 
 .wallpaper-frame {
@@ -408,7 +426,7 @@ body::before {
 
 .wallpaper-meta {
   color: #c2b2d6;
-  font-size: .95rem;
+  font-size: clamp(.8rem, 2.2vw, .95rem);
   text-align: center;
   margin-bottom: 1.5rem;
 }
@@ -426,9 +444,9 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: .6rem;
-  padding: .8rem 1.6rem;
+  padding: clamp(.6rem, 2vw, .8rem) clamp(1rem, 4vw, 1.6rem);
   border-radius: 50px;
-  font-size: 1.4rem;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
   font-weight: 600;
   text-decoration: none;
   border: 2px solid transparent;
@@ -479,9 +497,9 @@ body::before {
   gap: .5rem;
   color: #c2b2d6;
   text-decoration: none;
-  font-size: 1.4rem;
+  font-size: clamp(1rem, 2.8vw, 1.4rem);
   border: 1px solid rgba(179, 0, 255, .4);
-  padding: .5rem 1.1rem;
+  padding: clamp(.4rem, 1.5vw, .5rem) clamp(.8rem, 3vw, 1.1rem);
   border-radius: 30px;
   margin-bottom: 1.5rem;
   transition: all .2s ease;
@@ -496,9 +514,9 @@ body::before {
 /* Footer */
 .site-footer {
   text-align: center;
-  padding: 2rem 1rem;
+  padding: clamp(1.5rem, 4vw, 2rem) 1rem;
   color: #8a7ab6;
-  font-size: .85rem;
+  font-size: clamp(.7rem, 2vw, .85rem);
   border-top: 1px solid rgba(179, 0, 255, .2);
   margin-top: 2rem;
 }
@@ -585,6 +603,12 @@ body::before {
   margin-bottom: 1rem;
 }
 
+@media (max-width: 768px) {
+  .cosmic-popup__card { padding: 1.8rem 1.4rem 2.2rem; }
+  .cosmic-popup__card h2 { font-size: 1.7rem; }
+  .cosmic-popup__para { font-size: 1.1rem; }
+}
+
 @media (max-width: 600px) {
   .cosmic-popup__card { padding: 1.6rem 1.1rem 2rem; }
   .cosmic-popup__card h2 { font-size: 1.6rem; }
@@ -592,11 +616,24 @@ body::before {
 }
 
 /* ---- Responsive tweaks ---- */
+/* Tablet: slightly smaller ring */
+@media (max-width: 768px) {
+  .astral-ring { width: min(95vmin, 580px); height: min(95vmin, 580px); }
+  .ring-hub { width: 130px; height: 130px; margin: -65px 0 0 -65px; }
+}
+
 @media (max-width: 600px) {
   .astral-ring { width: min(95vmin, 340px); height: min(95vmin, 340px); }
   /* orbit-node sizes itself via min(150px, 20vmin) + JS calc centering */
   .ring-hub { width: 112px; height: 112px; margin: -56px 0 0 -56px; }
   .wallpaper-actions { flex-direction: column; align-items: stretch; }
+}
+
+/* ---- Ultra-small mobile ---- */
+@media (max-width: 400px) {
+  .astral-ring { width: min(95vmin, 300px); height: min(95vmin, 300px); }
+  .ring-hub { width: 100px; height: 100px; margin: -50px 0 0 -50px; }
+  .orbit-node { width: min(120px, 20vmin); height: min(120px, 20vmin); }
 }
 
 /* ---- Loading spinner (neon) ---- */
