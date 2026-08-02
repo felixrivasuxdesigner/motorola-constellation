@@ -422,10 +422,11 @@ body::before {
 
 .wallpaper-title {
   font-size: clamp(1.5rem, 4vw, 2.6rem);
-  font-weight: 800;
+  font-weight: 300;
   text-align: center;
   margin-bottom: .3rem;
-  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+  background: #ffffff;
+  /*background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));*/
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
