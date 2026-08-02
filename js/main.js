@@ -186,26 +186,6 @@
   }
 
   /* ------------------------------------------------
-     ACCESSIBILITY — toggle texto grande (presbicia)
-     ------------------------------------------------ */
-  function initAccessibilityToggle() {
-    let enabled = false;
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "a11y-toggle";
-    btn.setAttribute("aria-label", "Alternar texto grande");
-    btn.setAttribute("aria-pressed", "false");
-    btn.textContent = "A";
-    btn.addEventListener("click", () => {
-      enabled = !enabled;
-      document.documentElement.classList.toggle("big-text", enabled);
-      btn.classList.toggle("active", enabled);
-      btn.setAttribute("aria-pressed", String(enabled));
-    });
-    document.body.appendChild(btn);
-  }
-
-  /* ------------------------------------------------
      Cursor magical sparkle (constellation page only)
      ------------------------------------------------ */
   function initCursorSparkle() {
@@ -242,7 +222,6 @@
     positionOrbitalNodes();
     initWallpaperPage();
     initCosmicPopup();
-    initAccessibilityToggle();
     initCursorSparkle();
   }
 

@@ -52,50 +52,25 @@ h1, h2, h3, .logo,
   font-weight: 900;
 }
 
-/* =====================================================
-   ACCESIBILIDAD — texto grande (presbicia)
-   ===================================================== */
-/* Activo sobre <html>: escala TODOS los textos rem (títulos, párrafos,
-   números orbitales) manteniendo las proporciones. */
-html.big-text {
-  font-size: 1.3125rem; /* ~21px → todo crece ~1.31x (presbicia) */
-}
-
-/* Botón flotante de alternancia de texto grande */
-.a11y-toggle {
+/* ---- Logo Nanna fixed bottom-right ---- */
+.logo-nanna {
   position: fixed;
-  top: 1.25rem;
-  right: 1.25rem;
-  z-index: 3000;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(10, 5, 25, .6);
-  border: 1.5px solid var(--neon-white);
-  color: var(--neon-gold);
-  font-family: 'Cinzel Decorative', 'Segoe UI', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .25s ease;
-  backdrop-filter: blur(2px);
-  box-shadow: 0 0 10px rgba(255, 215, 0, .45);
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 120px;
+  height: auto;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.85;
+  transform: scaleX(-1);
 }
 
-.a11y-toggle:hover {
-  background: rgba(255, 255, 255, .14);
-  transform: scale(1.14);
-}
-
-.a11y-toggle.active {
-  background: rgba(255, 215, 0, .28);
-  box-shadow:
-    0 0 16px var(--gold-glow),
-    0 0 32px var(--gold-soft),
-    0 0 56px var(--gold-deep);
+@media (max-width: 600px) {
+  .logo-nanna {
+    width: 80px;
+    bottom: 1rem;
+    right: 1rem;
+  }
 }
 
 /* ---- Cursor magical sparkle (index constellation page) ---- */
