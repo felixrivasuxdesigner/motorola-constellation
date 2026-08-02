@@ -1,0 +1,21 @@
+{
+  "name": "The Motorola Constellation",
+  "short_name": "Moto Constellation",
+  "description": "Interactive cosmic constellation of team wallpapers",
+  "start_url": "/",
+  "display": "fullscreen",
+  "background_color": "#0a0a1a",
+  "theme_color": "#0a0a1a",
+  "icons": [
+    {
+      "src": "assets/logo-nanna.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/logo-nappa.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
