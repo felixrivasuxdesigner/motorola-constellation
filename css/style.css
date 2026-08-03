@@ -526,6 +526,9 @@ body::before {
 
 @media (max-width: 768px) {
   .back-link {
+    font-size: clamp(.75rem, 2vw, .9rem);
+    padding: clamp(.3rem, 1.5vw, .4rem) clamp(.6rem, 2vw, .8rem);
+    white-space: nowrap;
     top: max(1rem, env(safe-area-inset-top));
     left: max(1rem, env(safe-area-inset-left));
     bottom: auto;
@@ -674,7 +677,7 @@ body::before {
 /* Mobile: clean vertical column layout (no fixed positioning) */
 @media (max-width: 600px) {
   .wallpaper-hero {
-    padding: clamp(1rem, 4vw, 1.5rem) clamp(1rem, 4vw, 1.5rem) clamp(1rem, 4vw, 1.5rem) clamp(3rem, 8vw, 4rem);
+    padding: clamp(4rem, 12vw, 5rem) clamp(1rem, 4vw, 1.5rem) clamp(1rem, 4vw, 1.5rem) clamp(3rem, 8vw, 4rem);
   }
   .wallpaper-frame {
     max-height: calc(100dvh - 14rem);
