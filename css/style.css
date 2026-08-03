@@ -506,7 +506,7 @@ body::before {
     0 0 24px rgba(0, 243, 255, .3);
 }
 
-/* Back link — fixed bottom-left */
+/* Back link — fixed bottom-left on desktop, top-left on mobile */
 .back-link {
   position: fixed;
   bottom: max(1.5rem, env(safe-area-inset-bottom));
@@ -524,10 +524,12 @@ body::before {
   transition: all .2s ease;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .back-link {
-    bottom: max(1rem, env(safe-area-inset-bottom));
+    top: max(1rem, env(safe-area-inset-top));
     left: max(1rem, env(safe-area-inset-left));
+    bottom: auto;
+    right: auto;
   }
 }
 
@@ -663,22 +665,43 @@ body::before {
 }
 
 /* ---- Wallpaper page responsive ---- */
+/* Tablet */
 @media (max-width: 768px) {
-  .wallpaper-frame { max-height: calc(100dvh - 10rem); }
-  .wallpaper-actions { position: fixed; bottom: max(5rem, calc(1.5rem + env(safe-area-inset-bottom))); right: max(1.5rem, env(safe-area-inset-right)); z-index: 999; }
-  .wallpaper-actions .btn { font-size: clamp(.9rem, 2.5vw, 1rem); padding: .6rem 1.2rem; }
-  .site-footer { position: fixed; bottom: 0; left: 0; right: 0; padding: .6rem; font-size: .7rem; }
+  .wallpaper-frame { max-height: calc(100dvh - 12rem); }
+  .wallpaper-hero { padding: clamp(1rem, 4vw, 1.5rem); }
 }
 
+/* Mobile: clean vertical column layout (no fixed positioning) */
 @media (max-width: 600px) {
-  .wallpaper-frame { max-height: calc(100dvh - 12rem); }
-  .wallpaper-title { font-size: clamp(1.2rem, 4vw, 1.6rem); }
-  .wallpaper-subtitle { font-size: clamp(.75rem, 2.5vw, .95rem); }
+  .wallpaper-frame {
+    max-height: calc(100dvh - 14rem);
+    width: 100%;
+  }
+  .wallpaper-actions {
+    position: static;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .wallpaper-actions .btn {
+    font-size: clamp(.85rem, 2.5vw, 1rem);
+    padding: clamp(.6rem, 2vw, .8rem) clamp(1rem, 4vw, 1.4rem);
+    width: 100%;
+    justify-content: center;
+  }
+  .site-footer {
+    position: static;
+    padding: 1rem 0.5rem;
+    font-size: .7rem;
+    border-top: 1px solid rgba(179, 0, 255, .2);
+    margin-top: 1.5rem;
+  }
+  .wallpaper-title { font-size: clamp(1.2rem, 4vw, 1.5rem); }
+  .wallpaper-subtitle { font-size: clamp(.8rem, 2.5vw, 1rem); }
 }
 
 @media (max-width: 400px) {
-  .wallpaper-frame { max-height: calc(100dvh - 14rem); }
-  .wallpaper-actions { bottom: max(3.5rem, calc(1rem + env(safe-area-inset-bottom))); right: max(1rem, env(safe-area-inset-right)); }
+  .wallpaper-frame { max-height: calc(100dvh - 16rem); }
 }
 
 /* ---- Loading spinner (neon) ---- */
