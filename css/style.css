@@ -673,6 +673,9 @@ body::before {
 
 /* Mobile: clean vertical column layout (no fixed positioning) */
 @media (max-width: 600px) {
+  .wallpaper-hero {
+    padding: clamp(1rem, 4vw, 1.5rem) clamp(1rem, 4vw, 1.5rem) clamp(1rem, 4vw, 1.5rem) clamp(3rem, 8vw, 4rem);
+  }
   .wallpaper-frame {
     max-height: calc(100dvh - 14rem);
     width: 100%;
