@@ -535,6 +535,7 @@ body::before {
 
 /* Back link — fixed bottom-left on desktop, top-left on mobile */
 .back-link {
+  background: var(--nebula-purple);
   position: fixed;
   bottom: max(1.5rem, env(safe-area-inset-bottom));
   left: max(1.5rem, env(safe-area-inset-left));
