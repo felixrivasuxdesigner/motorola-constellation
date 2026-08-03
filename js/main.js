@@ -229,7 +229,7 @@
       "var(--neon-purple)",
     ];
 
-    const COUNT = 150;
+    const COUNT = 350;
     for (let i = 0; i < COUNT; i++) {
       const star = document.createElement("div");
       star.className = "twinkling-star";
