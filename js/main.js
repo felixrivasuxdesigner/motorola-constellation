@@ -217,6 +217,47 @@
   }
 
   /* ------------------------------------------------
+     Twinkling stars (background)
+     ------------------------------------------------ */
+  function initTwinklingStars() {
+    const container = document.createElement("div");
+    container.className = "twinkling-stars";
+    document.body.appendChild(container);
+
+    const STAR_COLORS = [
+      "var(--star-white)",
+      "var(--neon-cyan)",
+      "var(--neon-purple)",
+      "var(--neon-magenta)",
+    ];
+
+    const COUNT = 150;
+    for (let i = 0; i < COUNT; i++) {
+      const star = document.createElement("div");
+      star.className = "twinkling-star";
+
+      const size = Math.random() * 2 + 0.5; // 0.5–2.5px
+      star.style.width = star.style.height = `${size}px`;
+
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+
+      const delay = Math.random() * 5; // 0–5s
+      const duration = Math.random() * 4 + 2; // 2–6s
+      star.style.animationDelay = `${delay}s`;
+      star.style.animationDuration = `${duration}s`;
+
+      star.style.background = STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)];
+
+      if (size > 1.5) {
+        star.style.boxShadow = `0 0 ${size * 2}px ${size}px ${star.style.background}`;
+      }
+
+      container.appendChild(star);
+    }
+  }
+
+  /* ------------------------------------------------
      Init
      ------------------------------------------------ */
   function init() {
@@ -224,6 +265,7 @@
     initWallpaperPage();
     initCosmicPopup();
     initCursorSparkle();
+    initTwinklingStars();
   }
 
   if (document.readyState === "loading") {
