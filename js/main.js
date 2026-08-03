@@ -226,9 +226,7 @@
 
     const STAR_COLORS = [
       "var(--star-white)",
-      "var(--neon-cyan)",
       "var(--neon-purple)",
-      "var(--neon-magenta)",
     ];
 
     const COUNT = 150;
