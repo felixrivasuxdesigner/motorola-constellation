@@ -23,7 +23,7 @@
      { id: 6, title: "ALEJO", colorVar: "--neon-magenta", thumb: "assets/6-ALEJO.png", wallpaper: "https://picsum.photos/seed/motorola-wp-6/1920/1080" },
      { id: 7, title: "CARO",  colorVar: "--neon-purple",  thumb: "assets/7-CARO.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-7/1920/1080" },
      { id: 8, title: "MARTU", colorVar: "--neon-cyan",    thumb: "assets/8-MARTU.png", wallpaper: "https://picsum.photos/seed/motorola-wp-8/1920/1080" },
-     { id: 9, title: "ARI",   colorVar: "--neon-pink",    thumb: "assets/9-ARI.png",   wallpaper: "https://picsum.photos/seed/motorola-wp-9/1920/1080" },
+     { id: 9, title: "ARI",   colorVar: "--neon-pink",    thumb: "assets/9-ARI.png",   wallpaper: "assets/wallpapers/9-ARI-wallp.jpg", subtitle: "La constelación no se guía por estrellas... se guía por sus carcajadas ✨" },
    ];
 
   const NEON_CLASS = {
@@ -95,6 +95,19 @@
     if (hub) {
       hub.style.cursor = "pointer";
       hub.addEventListener("click", () => openCosmicPopup());
+    }
+
+    // First-visit pulse: guides the eye to click the orbit nodes
+    // Plays once per session (sessionStorage guard), with staggered delay per node
+    if (!sessionStorage.getItem("constellationIntroSeen")) {
+      const STAGGER = 0.18; // seconds between each node
+      nodes.forEach((node, i) => {
+        const label = node.querySelector(".node-label");
+        if (label) {
+          setTimeout(() => label.classList.add("pulse-intro"), i * STAGGER * 1000);
+        }
+      });
+      sessionStorage.setItem("constellationIntroSeen", "true");
     }
 
     // Gentle orbital drift: recompute each node's position every frame

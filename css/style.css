@@ -382,9 +382,23 @@ body::before {
   display: block;
 }
 
-/* Subtle scale feedback on hover (no golden halo) */
-.orbit-node .node-label:hover {
-  transform: scale(1.1) translateZ(0);
+/* Subtle scale + glow feedback on hover (consistent across buttons) */
+.orbit-node .node-label:hover,
+.btn-primary:hover,
+.btn-outline:hover,
+.back-link:hover {
+  transform: scale(1.06) translateZ(0);
+}
+
+/* ---- First-visit pulse: subtle glow to invite a click (once per session) ---- */
+.pulse-intro {
+  animation: pulseIntro 0.9s ease-in-out;
+}
+
+@keyframes pulseIntro {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
 }
 
 /* Hover ripple on entire ring */
@@ -508,7 +522,6 @@ body::before {
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px) scale(1.05);
   box-shadow:
     0 0 14px rgba(201, 168, 106, .6),
     0 0 28px rgba(201, 168, 106, .35),
@@ -524,7 +537,6 @@ body::before {
 }
 
 .btn-outline:hover {
-  transform: translateY(-3px);
   background: rgba(179, 0, 255, .1);
   border-color: var(--neon-cyan);
   color: var(--neon-cyan);
