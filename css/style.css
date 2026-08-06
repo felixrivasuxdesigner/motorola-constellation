@@ -515,7 +515,7 @@ body::before {
 
 .btn-primary {
   background: linear-gradient(135deg, #C9A86A, #B8860B);
-  color: #0a0a1a;
+  color: #200a3b;
   border-color: transparent;
   box-shadow:
     0 0 8px rgba(201, 168, 106, .5),
@@ -527,7 +527,7 @@ body::before {
     0 0 14px rgba(201, 168, 106, .6),
     0 0 28px rgba(201, 168, 106, .35),
     0 0 44px rgba(201, 168, 106, .15);
-  color: #fff7f0;
+  color: #120424;
 }
 
 .btn-outline {
@@ -578,9 +578,9 @@ body::before {
 }
 
 .back-link:hover {
-  color: var(--neon-cyan);
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 12px rgba(0, 243, 255, .4);
+  color: #C9A86A;
+  border-color: #C9A86A;
+  box-shadow: 0 0 12px rgba(201, 168, 106, .5);
 }
 
 /* Footer */
