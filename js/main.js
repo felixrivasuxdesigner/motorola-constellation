@@ -17,7 +17,7 @@
    const SECTIONS = [
      { id: 1, title: "TONE",  colorVar: "--neon-cyan",    thumb: "assets/1-TONE.png",  wallpaper: "assets/wallpapers/1-TONE-wallp.jpg", subtitle: "El orden no es suerte, es liderazgo ✨" },
      { id: 2, title: "DANU",  colorVar: "--neon-purple",  thumb: "assets/2-DANU.png",  wallpaper: "assets/wallpapers/2-DANU-wallp.jpg", subtitle: "Organiza, planifica, siente, dramatiza y hace que todo suceda ✨" },
-     { id: 3, title: "VALE",  colorVar: "--neon-magenta", thumb: "assets/3-VALE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-3/1920/1080" },
+     { id: 3, title: "VALE",  colorVar: "--neon-magenta", thumb: "assets/3-VALE.png",  wallpaper: "assets/wallpapers/3-VALE-wallp.jpg", subtitle: "Toda constelación necesita una estrella que marque el rumbo ✨" },
      { id: 4, title: "EUGE",  colorVar: "--neon-cyan",    thumb: "assets/4-EUGE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-4/1920/1080" },
      { id: 5, title: "BELU",  colorVar: "--neon-pink",    thumb: "assets/5-BELU.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-5/1920/1080" },
      { id: 6, title: "ALEJO", colorVar: "--neon-magenta", thumb: "assets/6-ALEJO.png", wallpaper: "https://picsum.photos/seed/motorola-wp-6/1920/1080" },
