@@ -24,7 +24,7 @@
       { id: 7, title: "CARO",  colorVar: "--neon-purple",  thumb: "assets/7-CARO.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-7/1920/1080" },
       { id: 8, title: "MARTU", colorVar: "--neon-cyan",    thumb: "assets/8-MARTU.png", wallpaper: "https://picsum.photos/seed/motorola-wp-8/1920/1080" },
       { id: 9, title: "ARI",   colorVar: "--neon-pink",    thumb: "assets/9-ARI.png",   wallpaper: "assets/wallpapers/9-ARI-wallp.jpg", subtitle: "La constelación no se guía por estrellas... se guía por sus carcajadas ✨" },
-      { id: 10, title: "RE",   colorVar: "--neon-gold",    thumb: "assets/10-RE.png",   wallpaper: "https://picsum.photos/seed/motorola-wp-10/1920/1080", subtitle: "Una estrella brillante en nuestra constelación ✨" },
+      { id: 10, title: "RE",   colorVar: "--neon-gold",    thumb: "assets/10-RE.png",   wallpaper: "assets/wallpapers/10-RE-wallp.jpg", subtitle: "Conecta personas, ideas y horizontes ✨" },
     ];
 
   const NEON_CLASS = {
