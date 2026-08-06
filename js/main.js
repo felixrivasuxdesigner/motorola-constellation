@@ -14,23 +14,25 @@
       - thumb:    imagen numerada que gira alrededor del sol (botón orbital)
       - wallpaper: path del wallpaper real (local)
       ------------------------------------------------ */
-   const SECTIONS = [
-     { id: 1, title: "TONE",  colorVar: "--neon-cyan",    thumb: "assets/1-TONE.png",  wallpaper: "assets/wallpapers/1-TONE-wallp.jpg", subtitle: "El orden no es suerte, es liderazgo ✨" },
-     { id: 2, title: "DANU",  colorVar: "--neon-purple",  thumb: "assets/2-DANU.png",  wallpaper: "assets/wallpapers/2-DANU-wallp.jpg", subtitle: "Organiza, planifica, siente, dramatiza y hace que todo suceda ✨" },
-     { id: 3, title: "VALE",  colorVar: "--neon-magenta", thumb: "assets/3-VALE.png",  wallpaper: "assets/wallpapers/3-VALE-wallp.jpg", subtitle: "Toda constelación necesita una estrella que marque el rumbo ✨" },
-     { id: 4, title: "EUGE",  colorVar: "--neon-cyan",    thumb: "assets/4-EUGE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-4/1920/1080" },
-     { id: 5, title: "BELU",  colorVar: "--neon-pink",    thumb: "assets/5-BELU.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-5/1920/1080" },
-     { id: 6, title: "ALEJO", colorVar: "--neon-magenta", thumb: "assets/6-ALEJO.png", wallpaper: "https://picsum.photos/seed/motorola-wp-6/1920/1080" },
-     { id: 7, title: "CARO",  colorVar: "--neon-purple",  thumb: "assets/7-CARO.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-7/1920/1080" },
-     { id: 8, title: "MARTU", colorVar: "--neon-cyan",    thumb: "assets/8-MARTU.png", wallpaper: "https://picsum.photos/seed/motorola-wp-8/1920/1080" },
-     { id: 9, title: "ARI",   colorVar: "--neon-pink",    thumb: "assets/9-ARI.png",   wallpaper: "assets/wallpapers/9-ARI-wallp.jpg", subtitle: "La constelación no se guía por estrellas... se guía por sus carcajadas ✨" },
-   ];
+    const SECTIONS = [
+      { id: 1, title: "TONE",  colorVar: "--neon-cyan",    thumb: "assets/1-TONE.png",  wallpaper: "assets/wallpapers/1-TONE-wallp.jpg", subtitle: "El orden no es suerte, es liderazgo ✨" },
+      { id: 2, title: "DANU",  colorVar: "--neon-purple",  thumb: "assets/2-DANU.png",  wallpaper: "assets/wallpapers/2-DANU-wallp.jpg", subtitle: "Organiza, planifica, siente, dramatiza y hace que todo suceda ✨" },
+      { id: 3, title: "VALE",  colorVar: "--neon-magenta", thumb: "assets/3-VALE.png",  wallpaper: "assets/wallpapers/3-VALE-wallp.jpg", subtitle: "Toda constelación necesita una estrella que marque el rumbo ✨" },
+      { id: 4, title: "EUGE",  colorVar: "--neon-cyan",    thumb: "assets/4-EUGE.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-4/1920/1080" },
+      { id: 5, title: "BELU",  colorVar: "--neon-pink",    thumb: "assets/5-BELU.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-5/1920/1080" },
+      { id: 6, title: "ALEJO", colorVar: "--neon-magenta", thumb: "assets/6-ALEJO.png", wallpaper: "https://picsum.photos/seed/motorola-wp-6/1920/1080" },
+      { id: 7, title: "CARO",  colorVar: "--neon-purple",  thumb: "assets/7-CARO.png",  wallpaper: "https://picsum.photos/seed/motorola-wp-7/1920/1080" },
+      { id: 8, title: "MARTU", colorVar: "--neon-cyan",    thumb: "assets/8-MARTU.png", wallpaper: "https://picsum.photos/seed/motorola-wp-8/1920/1080" },
+      { id: 9, title: "ARI",   colorVar: "--neon-pink",    thumb: "assets/9-ARI.png",   wallpaper: "assets/wallpapers/9-ARI-wallp.jpg", subtitle: "La constelación no se guía por estrellas... se guía por sus carcajadas ✨" },
+      { id: 10, title: "RE",   colorVar: "--neon-gold",    thumb: "assets/10-RE.png",   wallpaper: "https://picsum.photos/seed/motorola-wp-10/1920/1080", subtitle: "Una estrella brillante en nuestra constelación ✨" },
+    ];
 
   const NEON_CLASS = {
     "--neon-cyan": "neon-cyan",
     "--neon-purple": "neon-purple",
     "--neon-magenta": "neon-magenta",
     "--neon-pink": "neon-magenta",
+    "--neon-gold": "neon-gold",
   };
 
   /* ------------------------------------------------
@@ -110,18 +112,39 @@
       sessionStorage.setItem("constellationIntroSeen", "true");
     }
 
-    // Gentle orbital drift: recompute each node's position every frame
-    // (text stays upright because nodes are translated, never rotated)
+    // 3D Helical Solar System trajectory animation loop
     let drift = 0;
+    const TILT_ANGLE = (25 * Math.PI) / 180; // 25 degree axial tilt
     const animate = () => {
       drift += 0.04;
       nodes.forEach((node, i) => {
         const angleDeg = drift + (i / count) * 360;
         const angleRad = (angleDeg - 90) * (Math.PI / 180);
-        const x = Math.cos(angleRad) * radius;
-        const y = Math.sin(angleRad) * radius;
-        // calc(-50%) centers the (responsive-size) button on its orbital point
-        node.style.transform = `translate(calc(${x}px - 50%), calc(${y}px - 50%))`;
+
+        // Helical z-wave phase modulation (floating spiral vortex effect)
+        const zWave = Math.sin(drift * 0.08 + i * 0.6) * 0.15;
+
+        // Parametric 3D coords with tilted orbital plane
+        const rx = radius;
+        const ry = radius * Math.cos(TILT_ANGLE);
+        const x = Math.cos(angleRad) * rx;
+        const y = Math.sin(angleRad) * ry;
+
+        // Depth coordinate Z normalized from -1 (far behind) to +1 (near front)
+        const zVal = Math.sin(angleRad) + zWave;
+        const normZ = Math.max(-1, Math.min(1, zVal / 1.15));
+
+        // Depth scaling: scale down when behind, scale up when in front
+        const scale = 0.72 + (normZ + 1) * 0.20; // 0.72x to 1.12x
+        const opacity = 0.55 + (normZ + 1) * 0.225; // 0.55 to 1.0
+
+        // Z-index depth layering: Hub is at z-index 25
+        // Nodes pass behind hub when z < 0 (z-index 10-24) and in front when z > 0 (z-index 26-40)
+        const zIndex = Math.floor(10 + (normZ + 1) * 15);
+
+        node.style.zIndex = zIndex;
+        node.style.opacity = opacity.toFixed(3);
+        node.style.transform = `translate(calc(${x.toFixed(1)}px - 50%), calc(${y.toFixed(1)}px - 50%)) scale(${scale.toFixed(3)})`;
       });
       requestAnimationFrame(animate);
     };
