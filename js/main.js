@@ -50,8 +50,8 @@
   function computeOrbitalRadius(ring, nodes) {
     const ringRect = ring.getBoundingClientRect();
     const nodeW = (nodes[0] && nodes[0].getBoundingClientRect().width) || 150;
-    const maxRadius = Math.min(260, (ringRect.width / 2 - nodeW / 2 - 12) / 1.05);
-    return Math.max(110, Math.floor(maxRadius));
+    const maxRadius = Math.min(280, ringRect.width / 2 - nodeW / 2 - 12);
+    return Math.max(120, Math.floor(maxRadius));
   }
 
   /* ------------------------------------------------
@@ -112,47 +112,34 @@
       sessionStorage.setItem("constellationIntroSeen", "true");
     }
 
-    // Option 3: Keplerian Multi-Orbit Solar System (each planet has unique radius, speed & 3D plane tilt)
-    const PLANET_ORBITS = [
-      { rFactor: 0.52, speed: 1.30, tilt: 26, phase: 0 },
-      { rFactor: 0.64, speed: 1.18, tilt: 20, phase: 72 },
-      { rFactor: 0.76, speed: 1.06, tilt: 30, phase: 144 },
-      { rFactor: 0.88, speed: 0.95, tilt: 16, phase: 216 },
-      { rFactor: 1.00, speed: 0.86, tilt: 24, phase: 288 },
-      { rFactor: 0.58, speed: 1.24, tilt: 28, phase: 36 },
-      { rFactor: 0.70, speed: 1.12, tilt: 18, phase: 108 },
-      { rFactor: 0.82, speed: 1.00, tilt: 32, phase: 180 },
-      { rFactor: 0.94, speed: 0.90, tilt: 22, phase: 252 },
-      { rFactor: 1.05, speed: 0.80, tilt: 27, phase: 324 },
-    ];
-
+    // 3D Helical Solar System trajectory animation loop
     let drift = 0;
+    const TILT_ANGLE = (25 * Math.PI) / 180; // 25 degree axial tilt
     const animate = () => {
-      drift += 0.03;
+      drift += 0.04;
       nodes.forEach((node, i) => {
-        const orbit = PLANET_ORBITS[i % PLANET_ORBITS.length];
-
-        // Keplerian angular speed + phase offset
-        const angleDeg = drift * orbit.speed * (180 / Math.PI) + orbit.phase;
+        const angleDeg = drift + (i / count) * 360;
         const angleRad = (angleDeg - 90) * (Math.PI / 180);
 
-        // Helical micro-oscillation in Z axis
-        const zWave = Math.sin(drift * 0.5 + i) * 0.12;
+        // Helical z-wave phase modulation (floating spiral vortex effect)
+        const zWave = Math.sin(drift * 0.08 + i * 0.6) * 0.15;
 
-        const tiltRad = (orbit.tilt * Math.PI) / 180;
-        const rx = radius * orbit.rFactor;
-        const ry = rx * Math.cos(tiltRad);
-
+        // Parametric 3D coords with tilted orbital plane
+        const rx = radius;
+        const ry = radius * Math.cos(TILT_ANGLE);
         const x = Math.cos(angleRad) * rx;
         const y = Math.sin(angleRad) * ry;
 
-        // Depth Z coordinate (-1 far behind, +1 near front)
+        // Depth coordinate Z normalized from -1 (far behind) to +1 (near front)
         const zVal = Math.sin(angleRad) + zWave;
-        const normZ = Math.max(-1, Math.min(1, zVal / 1.12));
+        const normZ = Math.max(-1, Math.min(1, zVal / 1.15));
 
-        // Depth scaling, opacity and z-index passing behind/in front of Sun (z-index 25)
-        const scale = 0.70 + (normZ + 1) * 0.20; // 0.70x to 1.10x
+        // Depth scaling: scale down when behind, scale up when in front
+        const scale = 0.72 + (normZ + 1) * 0.20; // 0.72x to 1.12x
         const opacity = 0.55 + (normZ + 1) * 0.225; // 0.55 to 1.0
+
+        // Z-index depth layering: Hub is at z-index 25
+        // Nodes pass behind hub when z < 0 (z-index 10-24) and in front when z > 0 (z-index 26-40)
         const zIndex = Math.floor(10 + (normZ + 1) * 15);
 
         node.style.zIndex = zIndex;
