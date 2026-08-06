@@ -244,12 +244,13 @@ body::before {
 .site-header h1 {
    font-size: clamp(1.8rem, 8vw, 3rem);
    font-weight: 300;
-   background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-magenta));
+   background: linear-gradient(135deg, #C9A86A, #B8860B);
    background-clip: text;
    -webkit-background-clip: text;
    color: transparent;
    letter-spacing: .04em;
    line-height: 1.1;
+   filter: drop-shadow(0 0 12px rgba(201, 168, 106, 0.4));
 }
 
 .site-header .subtitle {
