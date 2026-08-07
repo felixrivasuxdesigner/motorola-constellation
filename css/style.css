@@ -429,13 +429,13 @@ body::before {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: clamp(1.5rem, 5vw, 2rem);
+  padding: clamp(1rem, 3vw, 1.5rem);
 }
 
 .wallpaper-frame {
   position: relative;
-  width: min(95vmin, 1100px);
-  max-height: calc(100dvh - clamp(6rem, 12vw, 8rem));
+  width: min(98vw, 1280px);
+  max-height: calc(100dvh - clamp(9rem, 16vh, 12rem));
   border-radius: 16px;
   overflow: hidden;
   border: 2px solid var(--neon-gold);
@@ -445,7 +445,7 @@ body::before {
     0 0 72px rgba(179, 0, 255, .12),
     0 0 40px var(--gold-glow);
   background: #0c0718;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .wallpaper-frame::before {
@@ -474,7 +474,7 @@ body::before {
 .wallpaper-text {
   text-align: center;
   width: 100%;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .wallpaper-title {
@@ -507,25 +507,35 @@ body::before {
 /* Action buttons */
 .wallpaper-actions {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.25rem;
   justify-content: center;
+  align-items: center;
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
   gap: .6rem;
-  padding: clamp(.6rem, 2vw, .8rem) clamp(1rem, 4vw, 1.6rem);
+  padding: clamp(.6rem, 2vw, .8rem) clamp(1.2rem, 4vw, 1.8rem);
   border-radius: 50px;
-  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
   font-weight: 600;
   text-decoration: none;
   border: 2px solid transparent;
   cursor: pointer;
-  transition: all .25s ease;
+  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
   letter-spacing: .02em;
+  min-height: 44px;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 3px;
+  box-shadow: 0 0 14px rgba(0, 243, 255, .7);
 }
 
 .btn-primary {
@@ -542,18 +552,26 @@ body::before {
     0 0 14px rgba(201, 168, 106, .6),
     0 0 28px rgba(201, 168, 106, .35),
     0 0 44px rgba(201, 168, 106, .15);
-  color: #120424;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.btn-primary:hover span,
+.btn-primary:hover .download-icon {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .btn-outline {
-  background: transparent;
+  background: rgba(15, 10, 51, 0.6);
   color: #e0e0ff;
-  border-color: var(--neon-purple);
-  box-shadow: 0 0 8px rgba(179, 0, 255, .4);
+  border-color: rgba(179, 0, 255, .6);
+  box-shadow: 0 0 8px rgba(179, 0, 255, .3);
+  backdrop-filter: blur(4px);
 }
 
 .btn-outline:hover {
-  background: rgba(179, 0, 255, .1);
+  background: rgba(179, 0, 255, .2);
   border-color: var(--neon-cyan);
   color: var(--neon-cyan);
   box-shadow:
@@ -561,35 +579,9 @@ body::before {
     0 0 24px rgba(0, 243, 255, .3);
 }
 
-/* Back link — fixed bottom-left on desktop, top-left on mobile */
+/* Back link — inline with download action in wallpaper-actions */
 .back-link {
-  background: var(--nebula-purple);
-  position: fixed;
-  bottom: max(1.5rem, env(safe-area-inset-bottom));
-  left: max(1.5rem, env(safe-area-inset-left));
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  color: #c2b2d6;
-  text-decoration: none;
-  font-size: clamp(1rem, 2.8vw, 1.4rem);
-  border: 1px solid rgba(179, 0, 255, .4);
-  padding: clamp(.4rem, 1.5vw, .5rem) clamp(.8rem, 3vw, 1.1rem);
-  border-radius: 30px;
-  z-index: 999;
-  transition: all .2s ease;
-}
-
-@media (max-width: 768px) {
-  .back-link {
-    font-size: clamp(.75rem, 2vw, .9rem);
-    padding: clamp(.3rem, 1.5vw, .4rem) clamp(.6rem, 2vw, .8rem);
-    white-space: nowrap;
-    top: max(1rem, env(safe-area-inset-top));
-    left: max(1rem, env(safe-area-inset-left));
-    bottom: auto;
-    right: auto;
-  }
+  white-space: nowrap;
 }
 
 .back-link:hover {
@@ -713,7 +705,6 @@ body::before {
   .astral-ring { width: min(95vmin, 340px); height: min(95vmin, 340px); }
   /* orbit-node sizes itself via min(150px, 20vmin) + JS calc centering */
   .ring-hub { width: 112px; height: 112px; margin: -56px 0 0 -56px; }
-  .wallpaper-actions { flex-direction: column; align-items: stretch; }
 }
 
 /* ---- Ultra-small mobile ---- */
@@ -726,29 +717,35 @@ body::before {
 /* ---- Wallpaper page responsive ---- */
 /* Tablet */
 @media (max-width: 768px) {
-  .wallpaper-frame { max-height: calc(100dvh - 12rem); }
+  .wallpaper-frame { max-height: calc(100dvh - 11rem); }
   .wallpaper-hero { padding: clamp(1rem, 4vw, 1.5rem); }
 }
 
-/* Mobile: clean vertical column layout (no fixed positioning) */
+/* Mobile layout */
 @media (max-width: 600px) {
   .wallpaper-hero {
-    padding: clamp(4rem, 12vw, 5rem) clamp(1rem, 4vw, 1.5rem) clamp(1rem, 4vw, 1.5rem) clamp(3rem, 8vw, 4rem);
+    padding: clamp(1rem, 4vw, 1.5rem);
   }
   .wallpaper-frame {
-    max-height: calc(100dvh - 14rem);
+    max-height: calc(100dvh - 12rem);
     width: 100%;
   }
   .wallpaper-actions {
     position: static;
     width: 100%;
-    max-width: 320px;
+    max-width: 480px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
     margin: 0 auto;
   }
   .wallpaper-actions .btn {
     font-size: clamp(.85rem, 2.5vw, 1rem);
-    padding: clamp(.6rem, 2vw, .8rem) clamp(1rem, 4vw, 1.4rem);
-    width: 100%;
+    padding: clamp(.5rem, 2vw, .7rem) clamp(.8rem, 3vw, 1.2rem);
+    width: auto;
+    min-height: 44px;
     justify-content: center;
   }
   .site-footer {
@@ -763,7 +760,14 @@ body::before {
 }
 
 @media (max-width: 400px) {
-  .wallpaper-frame { max-height: calc(100dvh - 16rem); }
+  .wallpaper-frame { max-height: calc(100dvh - 14rem); }
+  .wallpaper-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .wallpaper-actions .btn {
+    width: 100%;
+  }
 }
 
 /* ---- Loading spinner (neon) ---- */
