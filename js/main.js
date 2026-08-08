@@ -22,7 +22,7 @@
       { id: 5, title: "BELU",  colorVar: "--neon-pink",    thumb: "assets/5-BELU.png",  wallpaper: "assets/wallpapers/5-BELU-wallp.jpg", subtitle: "Mil ideas, mil pendientes, una energía imparable ✨" },
       { id: 6, title: "ALEJO", colorVar: "--neon-magenta", thumb: "assets/6-ALEJO.png", wallpaper: "assets/wallpapers/6-ALEJO-wallp.jpg", subtitle: "Donde hay un plan, hay un reporte ✨" },
       { id: 7, title: "CARO",  colorVar: "--neon-purple",  thumb: "assets/7-CARO.png",  wallpaper: "assets/wallpapers/7-CARO-wallp.jpg", subtitle: "Donde la naturaleza inspira, las ideas florecen 🍃" },
-      { id: 8, title: "MARTU", colorVar: "--neon-cyan",    thumb: "assets/8-MARTU.png", wallpaper: "assets/wallpapers/8-MARTU-wallp.jpg", subtitle: "La que convierte cada caos en un nuevo comienzo ✨" },
+      { id: 8, title: "MARTU", colorVar: "--neon-cyan",    thumb: "assets/8-MARTU.png", wallpaper: "assets/wallpapers/8-MARTU-wallp.jpg", subtitle: "Cada generación, tiene su propia magia ✨" },
       { id: 9, title: "ARI",   colorVar: "--neon-pink",    thumb: "assets/9-ARI.png",   wallpaper: "assets/wallpapers/9-ARI-wallp.jpg", subtitle: "La constelación no se guía por estrellas... se guía por sus carcajadas ✨" },
       { id: 10, title: "RE",   colorVar: "--neon-gold",    thumb: "assets/10-RE.png",   wallpaper: "assets/wallpapers/10-RE-wallp.jpg", subtitle: "Conecta personas, ideas y horizontes ✨" },
     ];
